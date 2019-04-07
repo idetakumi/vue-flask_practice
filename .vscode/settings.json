@@ -1,0 +1,11 @@
+{
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "python.pythonPath": "D:\\workspace.ide\\backend\\venv\\Scripts\\python.exe",
+  "python.venvFolders": [
+    "envs",
+    ".pyenv",
+    ".direnv",
+    ".venv"
+  ]
+}
