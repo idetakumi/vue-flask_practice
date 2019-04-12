@@ -3,7 +3,7 @@ from random import *
 from flask_cors import CORS
 from flask import make_response
 
-from backend import app, db
+from backend import db
 from backend.models import Task
 
 api = Blueprint('api', __name__)

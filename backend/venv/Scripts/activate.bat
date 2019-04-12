@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=C:\workspace.ide\backend\venv"
+set "VIRTUAL_ENV=D:\workspace.ide\backend\venv"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"

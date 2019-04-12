@@ -1,4 +1,4 @@
-from backend import db
+from backend import db, app
 
 class Task(db.Model):
     __tablename__ = 'tasks'
@@ -18,4 +18,5 @@ class Task(db.Model):
             id=self.id, title=self.title)
 
 def init():
-    db.create_all()
+    with app.app_context():
+        db.create_all()

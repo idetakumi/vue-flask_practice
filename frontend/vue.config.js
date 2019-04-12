@@ -12,7 +12,7 @@ module.exports = {
     // devServer: {
     //   proxy: 'http://localhost:5000'
     // },
-    outputDir: '../backend/templates', // 2. 出力先
+    outputDir: '../templates', // 2. 出力先
     pages: {
         index: {
             entry: 'src/main.js', // エントリーポイント
