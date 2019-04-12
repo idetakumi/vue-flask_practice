@@ -37,6 +37,6 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    if app.debug:
-        return requests.get('http://localhost:8080/{}'.format(path)).text
+#     if app.debug:
+#         return requests.get('http://localhost:8080/{}'.format(path)).text
     return render_template("index.html")
