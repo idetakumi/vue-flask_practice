@@ -4,7 +4,7 @@
     <h1>得点-点数換算アプリ</h1>
     <div>
       <label for="1st" class="majang-label" >一着 : </label>
-      <input type="number" id="1st" v-model='first' @onchange="checkDigit(first)">
+      <input type="number" id="1st" v-model='first'>
       00
     </div>
     <br>
@@ -30,14 +30,33 @@
       <h2>{{ message }}</h2>
     </div>
     <div>
-      <button class="majang_button">計算</button>
-      <button class="majang_button" style="margin-left: 20px;">CLEAR</button>
+      <button class="btn btn-primary" @click="computePoint">計算</button>
+      <button class="btn btn-primary" style="margin-left: 20px;" @click="clearAll">CLEAR</button>
     </div>
-  <div>
+    <br>
+    <div v-if="results.length === 4">
+      <h2>
+        <i>1着 : </i>
+        <i style="color: red;"> {{ results[3] }}</i>
+      </h2>
+      <h2>
+        <i>2着 : </i>
+        <i style="color: red;"> {{ results[2] }}</i>
+      </h2>
+      <h2>
+        <i>3着 : </i>
+        <i style="color: red;"> {{ results[1] }}</i>
+      </h2>
+      <h2>
+        <i>4着 : </i>
+        <i style="color: red;"> {{ results[0] }}</i>
+      </h2>
+    </div>
   </div>
-  </div>  
 </template>
 <script>
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {
   data () {
     return {
@@ -45,15 +64,45 @@ export default {
       second: 0,
       third: 0,
       forth: 0,
-      message: ''
+      message: '',
+      results: []
     }
   },
   methods: {
-    checkDigit (newVal) {
-      this.first = newVal
+    computePoint () {
+      this.message = ""
+      this.results = []
+      let pts = new Array
+      this.computeRank(this.forth, pts, -30)
+      this.computeRank(this.third, pts, -10)
+      this.computeRank(this.second, pts, 10)
+      let top = (pts[0] + pts[1] + pts[2]) * -1
+      pts.push(top)
+
+      // if ( pts[0] + pts[1] + pts[2] + top != 0) {
+      //   this.message = "得点の入力に誤りがあります。合計が±0になりません！"
+      //   return
+      // }
+
+      this.results = pts
+    },
+    computeRank (pt, pts, uma) {
+      if (pt < 0) {
+        pts.push(-60)
+      } else {
+        pts.push(Math.round((pt-300) / 10) + uma)
+      }
+    },
+    clearAll () {
+      this.first = 0
+      this.second = 0
+      this.third = 0
+      this.forth = 0
+      this.results = []
     }
   }
 }
+// # sourceURL=Point.js
 </script>
 <style>
   .majang_button {
