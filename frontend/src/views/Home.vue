@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <Form @addCard="onAddCard"></Form>
     <div class="panel panel-default">
       <Place :list="list"></Place>

@@ -2,9 +2,11 @@ from flask import Blueprint, jsonify, request
 from random import *
 from flask_cors import CORS
 from flask import make_response
+from flask_login import current_user
 
 from backend import db
-from backend.models import Task
+from backend.models.task import Task
+from backend.models.user import User
 
 api = Blueprint('api', __name__)
 
@@ -22,7 +24,7 @@ def random_number():
 
 @api.route('/get', methods=['GET'])
 def get_taks():
-    taks = Task.query.order_by(Task.id.desc()).all()
+    taks = Task.query.filter(Task.user_id==current_user.id).order_by(Task.id.desc()).all()
     taks_dict = [task.to_dict() for task in taks]
     return jsonify(taks_dict)
 
@@ -30,11 +32,12 @@ def get_taks():
 def add_task():
     task = Task(
         title=request.form['title'],
-        text=request.form['text']
+        text=request.form['text'],
+        user_id=current_user.id
         )
     db.session.add(task)
     db.session.commit()
-    task = Task.query.order_by(Task.id.desc()).first()
+    task = Task.query.filter(User.id==current_user.id).order_by(Task.id.desc()).first()
     id = str(task.id)
     r = make_response(id)
     return r

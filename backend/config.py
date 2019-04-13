@@ -10,6 +10,7 @@ class BaseConfig(object):
     FLASK_ENV =  os.getenv('FLASK_ENV', 'production')
     # Set FLASK_SECRET on your production Environment
     SECRET_KEY = os.getenv('FLASK_SECRET', 'Secret')
+    WTF_CSRF_SECRET_KEY = os.urandom(24)
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     APP_DIR = os.path.dirname(__file__)

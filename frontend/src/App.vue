@@ -6,6 +6,9 @@
       <router-link to="/api/random">Random</router-link> |
       <router-link to="/point">Point</router-link>
     </div>
+      <form action="/-/logout" method="post" >
+        <button type="submit">ログアウト</button>
+      </form>
     <router-view/>
   </div>
 </template>
