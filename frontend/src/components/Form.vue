@@ -45,7 +45,7 @@ export default {
         this.message = 'タイトルもしくは内容が空欄です！'
         return
       }
-      const path = 'http://localhost:5000/api/add'
+      const path = '/api/add'
       let params = new URLSearchParams()
       params.append('title', this.card.title)
       params.append('text', this.card.text)

@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     onDeleteCard (index,id) {
-      const path = 'http://localhost:5000/api/delete'
+      const path = '/api/delete'
       let params = new URLSearchParams()
       params.append('id', id)
       this.list.splice(index, 1)
@@ -52,7 +52,7 @@ export default {
       this.modalProp.isopen = true
     },
     onUpdateCard ({ updatedCard }) {
-      const path = 'http://localhost:5000/api/update'
+      const path = '/api/update'
       let params = new URLSearchParams()
       params.append('id', updatedCard.id)
       params.append('title', updatedCard.title)

@@ -28,7 +28,7 @@ export default {
     }
   },
   created: function () {
-    const path = 'http://localhost:5000/api/get'
+    const path = '/api/get'
     axios.get(path)
       .then(response => {
         this.list = response.data
