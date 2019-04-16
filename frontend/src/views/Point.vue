@@ -73,7 +73,7 @@ export default {
       this.message = ""
       this.results = []
       let pts = new Array
-      this.computeRank(this.forth, pts, -30)
+      this.computeRank(this.forth, pts, -20)
       this.computeRank(this.third, pts, -10)
       this.computeRank(this.second, pts, 10)
       let top = (pts[0] + pts[1] + pts[2]) * -1

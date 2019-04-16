@@ -3,36 +3,35 @@
     <img src="@/assets/majang.jpg" style="width: 350px; height: 250px;">
     <h1>オーラス点数計算アプリ</h1>
     <div>
-      <label class="majang-label" for="mine">自分の点数 : </label>
+      <label for="mine">自分の点数 : </label>
       <input type="number" id="mine" v-model="mine">
+      <i>00点</i>
 
-      <select id="parent" v-model="isParent" style="">
-        <option>親</option>
-        <option>子</option>
-      </select>
+      <input type="checkbox" id="parent" v-model="isParent" class="checkbox">
+      <label for="parent">親</label>
     </div>
     <br>
     <div>
-      <label class="majang-label" for="other">他家の点数 : </label>
+      <label for="other">他家の点数 : </label>
       <input type="number" id="other" v-model="other">
-      <select id="parent" v-model="isParent_other">
-        <option>親</option>
-        <option>子</option>
-      </select>
+      <i>00点</i>
+
+      <input type="checkbox" id="parent-other" v-model="isParent_other" class="checkbox">
+      <label for="parent">親</label>
     </div>
     <br>
     <div>
-      <label class="majang-label" for="kyoutaku">供託 : </label>
+      <label for="kyoutaku">供託 : </label>
       <input type="number" min="0" id="kyoutaku" v-model="kyotaku" readonly="readonly">
-      <i class="majang-label">本</i>
+      <i>本</i>
       <button class="btn btn-primary" style="margin: 5px;" @click="incrementKyotaku">+</button>
       <button class="btn btn-primary" style="margin: 5px;" @click="decrementKyotaku">-</button>
     </div>
     <br>
     <div>
-      <label class="majang-label" for="honba"></label>
+      <label for="honba"></label>
       <input type="number" min="0" id="honba" v-model="honba" readonly="readonly">
-      <i class="majang-label">本場</i>
+      <i>本場</i>
       <button class="btn btn-primary" style="margin: 5px;" @click="incrementHonba">+</button>
       <button class="btn btn-primary" style="margin: 5px;" @click="decrementHonba">-</button>
     </div>
@@ -70,8 +69,8 @@ export default {
     return {
       mine: 0,
       other: 0,
-      isParent: "親",
-      isParent_other: "子",
+      isParent: true,
+      isParent_other: false,
       message: "",
       kyotaku: 0,
       honba: 0,
@@ -90,11 +89,11 @@ export default {
         this.message = "数値を入力してください！"
         return
       }
-      if (this.isParent == '親' && this.isParent_other == '親') {
+      if (this.isParent && this.isParent_other) {
         this.message = "親は複数設定できません！"
         return
       }
-      let difference = Math.abs(this.mine - this.other)
+      let difference = Math.abs(this.mine - this.other) * 100
       let ronDifference = difference - (this.kyotaku * 1000 + this.honba * 600)
       let tsumoDifference = difference - (this.kyotaku * 1000 + this.honba * 400)
       let ronMap
@@ -172,6 +171,7 @@ export default {
   .about {
     background: #ededed;
     font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
   }
   .kyotaku_button {
     display: inline-block;
@@ -184,7 +184,7 @@ export default {
     border-radius: 5px;
     position: relative;
   }
-  #parent {
+  .checkbox {
     height: 25px;
     margin: 10px;
   }
@@ -202,11 +202,6 @@ export default {
   position: relative;
   height: 40px;
 }
-
-.majang-label {
-  font-weight: bold;
-}
-
 .btn-icon:before {
   font-family: "FontAwesome";
   content: "\f105";/* 好きなフォントアイコンを　*/
@@ -215,9 +210,18 @@ export default {
   top: 50%;
   margin-top: -8px;
 }
-
 .btn-icon:hover {
   opacity: 0.8;
+}
+input[type=text], input[type=number] {
+  width: 100px;
+}
+input[type=checkbox] {
+	width:			24px;
+	height:			24px;
+	-moz-transform:		scale(1.4);
+	-webkit-transform:	scale(1.4);
+	transform:		scale(1.4);
 }
 </style>
 
