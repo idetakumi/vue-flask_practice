@@ -10,9 +10,19 @@
     </div>
     <br>
     <div>
-      <h4 class="header"> TASK </h4>
-      <textarea class="input-card" cols="40" rows="2" v-model='card.text' maxlength="100"></textarea>
+      <h4 class="header"> MEMO </h4>
+      <textarea class="input-card" cols="40" rows="2" v-model='card.text' maxlength="100" placeholder="空白可"></textarea>
     </div>
+    <br>
+    <div>
+      <h4 class="header">PRIORITY</h4>
+      <select class="selectpicker" v-model='card.priority'>
+        <option value="normal">ふつう</option>
+        <option value="urgent">いそぎ</option>
+        <option value="relax">のんびり</option>
+      </select>
+    </div>
+    <br>
     <div>
       <button class="btn btn-primary" style="margin: 5px;" v-on:click='saveText'>保存</button>
       <button class="btn btn-primary" style="margin: 5px;" v-on:click='clearText'>クリア</button>
@@ -28,7 +38,8 @@ export default {
     return {
       card: {
         title: '',
-        text: ''
+        text: '',
+        priority: 'normal',
       },
       lists: [],
       message: ''
@@ -38,24 +49,27 @@ export default {
     clearText () {
       this.card.title = ''
       this.card.text = ''
+      this.card.priority = 'normal'
       this.message = ''
     },
     saveText () {
-      if (!this.card.title || !this.card.text) {
-        this.message = 'タイトルもしくは内容が空欄です！'
+      if (!this.card.title) {
+        this.message = 'タイトルが空欄です！'
         return
       }
       const path = '/api/add'
       let params = new URLSearchParams()
       params.append('title', this.card.title)
       params.append('text', this.card.text)
+      params.append('priority', this.card.prior)
       let task
       var titleValue = this.card.title
       var textValue = this.card.text
+      var priority = this.card.priority
       axios.post(path, params)
         .then(response => {
           let id = response.data
-          task = {'id': id, 'text': textValue, 'title': titleValue}
+          task = {'id': id, 'text': textValue, 'title': titleValue, 'priority': priority}
           this.clearText()
           this.$emit('addCard', { task: task })
         }).catch(error => {
@@ -68,7 +82,7 @@ export default {
 </script>
 <style>
   .input-card {
-    width:160px;
+    width:200px;
     height:50px;
   }
 

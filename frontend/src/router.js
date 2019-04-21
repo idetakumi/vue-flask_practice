@@ -26,8 +26,8 @@ export default new Router({
       component: () => import('./components/NotFound.vue')
     },
     {
-      path: '/api/random',
-      component: () => import('./components/Api.vue')
+      path: '/help',
+      component: () => import('./components/Help.vue')
     },
     {
       path: '/point',

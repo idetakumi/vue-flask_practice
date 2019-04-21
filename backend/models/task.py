@@ -7,13 +7,15 @@ class Task(db.Model):
     title = db.Column(db.Text)
     text = db.Column(db.Text)
     user_id = db.Column(db.Integer)
+    priority = db.Column(db.Text)
 
     def to_dict(self):
         return dict(
             id=self.id,
             title=self.title,
             text=self.text,
-            user_id=self.user_id
+            user_id=self.user_id,
+            priority=self.priority
         )
 
     def __repr__(self):

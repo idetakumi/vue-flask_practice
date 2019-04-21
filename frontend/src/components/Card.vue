@@ -1,5 +1,5 @@
 <template>
-    <div class="card" @click='openEditModal'>
+    <div class="card" v-bind:class="card.priority" @click='openEditModal'>
       <p class="cancel" @click.stop='deleteCard'>×</p>
       <div class="card-content">
         {{ card.title }}
@@ -53,5 +53,13 @@ export default {
     margin:0;
     font-weight: 100;
     font-size: 15pt;
+  }
+
+  .urgent {
+    background-color: #ff6347;
+  }
+
+  .relax {
+    background-color: #6495ed;
   }
 </style>

@@ -20,13 +20,19 @@
             <input type="text" v-model="prop.title">
             <h4 class="header" style="margin:10px"> TEXT </h4>
             <textarea class="input-card" type="text" v-model="prop.text"></textarea>
+            <h4 class="header">PRIORITY</h4>
+              <select class="selectpicker" v-model='prop.priority'>
+                <option value="normal">ふつう</option>
+                <option value="urgent">いそぎ</option>
+                <option value="relax">のんびり</option>
+              </select>
           </div>
 
           <div class="modal-footer">
-            <button class="btn-primary" style="margin: 5px;" @click.stop="prop.isopen = false">
+            <button class="btn btn-primary" style="margin: 5px;" @click.stop="prop.isopen = false">
               CANCEL
             </button>
-            <button class="btn-primary" style="margin: 5px;" @click.stop="updateCard">
+            <button class="btn btn-primary" style="margin: 5px;" @click.stop="updateCard">
               OK
             </button>
           </div>
@@ -42,19 +48,19 @@ export default {
   data () {
     return {
       message: '',
-      modal: {
-        modalTitle: this.prop.title,
-        modalText: this.prop.text
-      }
+      // modal: {
+      //   modalTitle: this.prop.title,
+      //   modalText: this.prop.text
+      // }
     }
   },
   methods: {
     updateCard () {
-      if (!this.prop.title || !this.prop.text) {
-        this.message = '空白は登録できません。'
+      if (!this.prop.title) {
+        this.message = 'タイトルに空白は登録できません。'
         return
       }
-      this.$emit('updateCard', {updatedCard: {id: this.prop.id, title: this.prop.title, text: this.prop.text, index: this.prop.index}})
+      this.$emit('updateCard', {updatedCard: {id: this.prop.id, title: this.prop.title, text: this.prop.text, priority: this.prop.priority, index: this.prop.index}})
       this.prop.isopen = false
     }
   }

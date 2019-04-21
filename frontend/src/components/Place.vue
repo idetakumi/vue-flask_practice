@@ -3,6 +3,8 @@
   <div class="card-default">
   <EditModal v-if='modalProp.isopen' :prop="modalProp" @updateCard="onUpdateCard"></EditModal>
   <div>
+    <h4 v-if="list.length === 0 " style="color: red;"> {{ message }}</h4>
+    <h4 v-if="list.length === 0">There are no Tasks now!</h4>
     <ul>
       <li v-for='(card, index) in list' v-bind:key='index' class='card-list'>
         <Card :card="card" :index="index" @deleteCard='onDeleteCard' @openEditModal='onOpenEditModal'></Card>
@@ -25,9 +27,11 @@ export default {
         id: '',
         title: '',
         text: '',
+        priority: '',
         index: '',
         isopen: false
-      }
+      },
+      message: ''
     }
   },
   methods: {
@@ -43,11 +47,15 @@ export default {
         .catch(error => {
           console.log(error)
         })
+      if (this.list.length === 0) {
+        this.message = "Congratulations! You've achieved all Tasks!"
+      }
     },
     onOpenEditModal ({ card }, { index }) {
       this.modalProp.id = card.id
       this.modalProp.title = card.title
       this.modalProp.text = card.text
+      this.modalProp.priority = card.priority
       this.modalProp.index = index
       this.modalProp.isopen = true
     },
@@ -57,6 +65,7 @@ export default {
       params.append('id', updatedCard.id)
       params.append('title', updatedCard.title)
       params.append('text', updatedCard.text)
+      params.append('priority', updatedCard.priority)
       axios.post(path, params)
         .then(response => {
           console.log(response)
@@ -66,6 +75,7 @@ export default {
         })
       this.list[updatedCard.index].title = updatedCard.title
       this.list[updatedCard.index].text = updatedCard.text
+      this.list[updatedCard.index].priority = updatedCard.priority
     }
   },
   components: {

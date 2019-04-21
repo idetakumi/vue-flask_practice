@@ -3,11 +3,11 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/api/random">Random</router-link> |
+      <router-link to="/help">HELP</router-link> |
       <router-link to="/point">Point</router-link>
     </div>
       <form action="/-/logout" method="post" >
-        <button type="submit">ログアウト</button>
+        <button class="btn btn-primary" type="submit">ログアウト</button>
       </form>
     <router-view/>
   </div>

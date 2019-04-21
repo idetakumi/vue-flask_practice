@@ -71,7 +71,7 @@ export default {
       other: 0,
       isParent: true,
       isParent_other: false,
-      message: "",
+      message: "点数は上三桁だけ入力してください！",
       kyotaku: 0,
       honba: 0,
       ronResult: "",
@@ -138,9 +138,9 @@ export default {
     clearAll () {
       this.mine = 0
       this.other = 0
-      this.isParent = '親'
-      this.isParent_other = '子'
-      this.message = ''
+      this.isParent = true
+      this.isParent_other = false
+      this.message = '点数は上三桁だけ入力してください！'
       this.kyotaku = 0
       this.honba = 0
       this.ronResult = ''

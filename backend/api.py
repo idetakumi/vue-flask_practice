@@ -10,18 +10,6 @@ from backend.models.user import User
 
 api = Blueprint('api', __name__)
 
-@api.route('/hello/<string:name>/')
-def say_hello(name):
-    response = { 'msg': "Hello {}".format(name) }
-    return jsonify(response)
-
-@api.route('/random')
-def random_number():
-    response = {
-        'randomNumber': randint(1, 100)
-    }
-    return jsonify(response)
-
 @api.route('/get', methods=['GET'])
 def get_taks():
     taks = Task.query.filter(Task.user_id==current_user.id).order_by(Task.id.desc()).all()
@@ -33,7 +21,8 @@ def add_task():
     task = Task(
         title=request.form['title'],
         text=request.form['text'],
-        user_id=current_user.id
+        user_id=current_user.id,
+        priority=request.form['priority']
         )
     db.session.add(task)
     db.session.commit()
@@ -57,6 +46,7 @@ def update_task():
     task = db.session.query(Task).filter(Task.id==id).first()
     task.title = request.form['title']
     task.text = request.form['text']
+    task.priority = request.form['priority']
     db.session.commit()
     r = make_response(id)
     return r
