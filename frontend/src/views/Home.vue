@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-
-    <Form @addCard="onAddCard"></Form>
+    <div style="width: 350px; margin: auto;">
+      <button type="button" id="addbtn" class="btn btn-primary" style="margin: auto;" @click="openForm">TODO追加</button>
+      <br>
+      <br>
+      <Form v-if="isOpenForm" @closeForm='onCloseForm' @addCard='onAddCard'></Form>
+    </div>
     <div class="panel panel-default">
       <Place :list="list"></Place>
     </div>
@@ -20,12 +24,20 @@ export default {
   },
   data () {
     return {
-      list: []
+      list: [],
+      isOpenForm: false
     }
   },
   methods: {
     onAddCard ({ task }) {
       this.list.unshift(task)
+      this.onCloseForm()
+    },
+    openForm () {
+      this.isOpenForm = true
+    },
+    onCloseForm () {
+      this.isOpenForm = false
     }
   },
   created: function () {

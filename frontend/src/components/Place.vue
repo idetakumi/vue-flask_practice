@@ -1,11 +1,11 @@
 <template>
-<div class="card">
+<div class="card" style="width: 350px; margin: auto; border: solid;">
   <div class="card-default">
   <EditModal v-if='modalProp.isopen' :prop="modalProp" @updateCard="onUpdateCard"></EditModal>
   <div>
     <h4 v-if="list.length === 0 " style="color: red;"> {{ message }}</h4>
     <h4 v-if="list.length === 0">There are no Tasks now!</h4>
-    <ul>
+    <ul style="margin-top: 5px; margin-bottom: 5px;">
       <li v-for='(card, index) in list' v-bind:key='index' class='card-list'>
         <Card :card="card" :index="index" @deleteCard='onDeleteCard' @openEditModal='onOpenEditModal'></Card>
       </li>
@@ -28,6 +28,7 @@ export default {
         title: '',
         text: '',
         priority: '',
+        // date: '',
         index: '',
         isopen: false
       },
@@ -56,6 +57,7 @@ export default {
       this.modalProp.title = card.title
       this.modalProp.text = card.text
       this.modalProp.priority = card.priority
+      // this.modalProp.date = card.date
       this.modalProp.index = index
       this.modalProp.isopen = true
     },
@@ -66,6 +68,7 @@ export default {
       params.append('title', updatedCard.title)
       params.append('text', updatedCard.text)
       params.append('priority', updatedCard.priority)
+      // params.append('date', updatedCard.date)
       axios.post(path, params)
         .then(response => {
           console.log(response)
@@ -76,6 +79,7 @@ export default {
       this.list[updatedCard.index].title = updatedCard.title
       this.list[updatedCard.index].text = updatedCard.text
       this.list[updatedCard.index].priority = updatedCard.priority
+      // this.list[updatedCard.date].date = updatedCard.date
     }
   },
   components: {

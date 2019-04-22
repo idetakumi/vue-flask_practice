@@ -32,6 +32,20 @@
       </div>
         
     </div>
+    <br>
+    <div class="card help-card">
+      <h4 style="color: #71ff71; background-color: forestgreen;">リリースノート</h4>
+      <div class="card-body" style="background-color: lightgrey; color: black;">
+        <div class="card-text">
+          <li>
+            <span class="text">2019/04/22</span>
+            <span class="text">TODOメモの追加を別ウインドウで</span>
+            <span class="text">行うよう修正。</span>
+            <span class="text">その他UIを改善。</span>
+          </li>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <style>

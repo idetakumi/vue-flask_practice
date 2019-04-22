@@ -24,7 +24,7 @@ export default {
   .card {
     margin: auto;
     margin-bottom: 5px;
-    width: 200px;
+    width: 250px;
     height: auto;
     min-height: 30px;
     background: #71ff71;

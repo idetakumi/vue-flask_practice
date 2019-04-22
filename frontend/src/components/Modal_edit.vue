@@ -16,20 +16,24 @@
           </div>
 
           <div class="modal-body">
-            <h4 class="header" style="margin:10px"> TITLE </h4>
+            <h5 class="header" style="margin:10px"> TITLE </h5>
             <input type="text" v-model="prop.title">
-            <h4 class="header" style="margin:10px"> TEXT </h4>
-            <textarea class="input-card" type="text" v-model="prop.text"></textarea>
-            <h4 class="header">PRIORITY</h4>
-              <select class="selectpicker" v-model='prop.priority'>
-                <option value="normal">ふつう</option>
-                <option value="urgent">いそぎ</option>
-                <option value="relax">のんびり</option>
-              </select>
+            <h5 class="header" style="margin:10px"> MEMO </h5>
+            <textarea class="input-card" type="text" maxlength="100" 
+              placeholder="空白可" cols="40" row="2" v-model="prop.text"></textarea>
+            <h5 class="header">PRIORITY</h5>
+            <select class="selectpicker" v-model='prop.priority'>
+              <option value="normal">ふつう</option>
+              <option value="urgent">いそぎ</option>
+              0<option value="relax">のんびり</option>
+            </select>
+            <!-- <h5 class="header">DUE</h5>
+            <Datepicker v-model='prop.date' name='date' style="margin: auto;" format="yyyy/MM/dd"></Datepicker>
+            <br> -->
           </div>
 
           <div class="modal-footer">
-            <button class="btn btn-primary" style="margin: 5px;" @click.stop="prop.isopen = false">
+            <button class="btn btn-secondary" style="margin: 5px;" @click.stop="prop.isopen = false">
               CANCEL
             </button>
             <button class="btn btn-primary" style="margin: 5px;" @click.stop="updateCard">
